@@ -17,11 +17,13 @@ module.exports = function register(server) {
         });
 
         socket.emit('initialize', [
-            {t:20},
-            {t:21},
-            {t:21},
-            {t:22},
-            {t:22},
+            20,
+            21,
+            21,
+            22,
+            22,
+            22,
+            23,
         ]);
     });
 };
