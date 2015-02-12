@@ -1,6 +1,11 @@
+html, body{
+    background-color: #212121;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color:#fafafa;
 }
 
 a {
