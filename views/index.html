@@ -9,6 +9,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="https://rawgit.com/highslide-software/highcharts.com/master/js/themes/dark-unica.js"></script>
     <body>
      <!-- create the div for the chart -->
      <div id="chart" style="width:100%; height:800px;"></div>
@@ -16,6 +17,7 @@
     <script>
      // create the websocket; for intranet use the ip-address of the raspberry pi suffices;
     var socket = io.connect('http://localhost:3000');
+    window.socket = socket;
     var chart,
         startDate = Date.UTC(2009, 9, 6, 0, 0, 0);
     chart = new Highcharts.Chart({
@@ -39,7 +41,7 @@
             }
         },
         title: {
-            text: 'Updates (C)'
+            text: 'Temperature (C)'
         },
         xAxis: {
             type: 'datetime',
@@ -61,7 +63,7 @@
         },
         series: [{
             name: 'Temperature',
-            type: 'line',
+            type: 'area',
             pointStart:startDate,
             pointInterval:5*60*1000,
             data: []
@@ -81,22 +83,18 @@
             h: randomInt(20, 60),
             tmp: Date.now()
         };
-        console.log('SENDNG', payload)
+
         $.ajax({
             url: 'http://localhost:3000/sensor/collect',
             type: 'POST',
+            contentType: "application/json",
             dataType: 'json',
-            // headers: {
-            //     "Content-Type": "text/javascript; charset=utf-8"
-            // },
-            data: payload
+            data: JSON.stringify(payload)
         }).done(function(response){
             setTimeout(fakeData, 16 * 100);
         });
 
     }
-
-
     </script>
  </body>
 </html>
