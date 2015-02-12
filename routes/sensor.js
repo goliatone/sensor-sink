@@ -8,12 +8,13 @@ router.get('/', function(req, res) {
     });
 });
 
-//curl -H "Content-Type: application/json" -d '{"uuid":"xyz","t":"30", "h":"40"}' http://localhost:3000/sensor/collect
+//var unitTimestamp = Math.round((new Date()).getTime() / 1000);
+//curl -H "Content-Type: application/json" -d '{"uuid":"xyz","t":30, "h":40, "tmp":1423761255422}' http://localhost:3000/sensor/collect
 router.post('/collect', function(req, res){
     console.log('COLLECT', req.body);
     //THIS IS A JOKE :)
     Pubsub.emit('live-tracker', req.body);
-    router.app.server.io.sockets.in('live-tracker').emit('kaka', req.body);
+    // router.app.server.io.sockets.in('live-tracker').emit('kaka', req.body);
 
     res.send({
         status: true
