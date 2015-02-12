@@ -8,6 +8,8 @@ router.get('/', function(req, res) {
     });
 });
 
+// router.get('/devices', function(req, res){});
+
 //var unitTimestamp = Math.round((new Date()).getTime() / 1000);
 //curl -H "Content-Type: application/json" -d '{"uuid":"xyz","t":30, "h":40, "tmp":1423761255422}' http://localhost:3000/sensor/collect
 router.post('/collect', function(req, res){
