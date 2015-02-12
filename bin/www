@@ -8,5 +8,6 @@ var server = app.listen(app.get('port'), function() {
    debug('Express server listening on port ' + server.address().port);
 });
 
+app.server = server;
 //SOCKETS.IO
 require('../middleware/sockets')(server);
