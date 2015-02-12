@@ -29,13 +29,14 @@
                     });
 
                     socket.on('update', function(values) {
+                        console.log('UPDATE', values)
                         chart.series[0].addPoint(values, 1, 1);
                     });
                 }
             }
         },
         title: {
-            text: 'Actual usage (W)'
+            text: 'Updates (C)'
         },
         xAxis: {
             type: 'datetime',
