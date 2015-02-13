@@ -16,14 +16,6 @@ module.exports = function register(server) {
             socket.emit('update', data);
         });
 
-        socket.emit('initialize', [
-            20,
-            21,
-            21,
-            22,
-            22,
-            22,
-            23,
-        ]);
+        socket.emit('initialize', [0, 5, 10]);
     });
 };
