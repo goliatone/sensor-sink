@@ -13,6 +13,7 @@ module.exports = function register(app){
     var Device = app.Device = restful.model('device', mongoose.Schema({
         uuid: 'string',
         token:'string',
+        // objectId: mongoose.Schema.ObjectId,
         timestamp:  'number',
     }))
     .methods(['get', 'post', 'put', 'delete']);
