@@ -9,33 +9,42 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="/javascripts/vendors/moment/moment.js"></script>
+    <script src="/javascripts/vendors/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
     <script src="https://rawgit.com/highslide-software/highcharts.com/master/js/themes/dark-unica.js"></script>
     <body>
      <!-- create the div for the chart -->
-     <div id="chart" style="width:100%; height:800px;"></div>
+     <div id="temperature" style="width:100%; height:200px;"></div>
+     <div id="humidity" style="width:100%; height:200px;"></div>
      <!-- Start of Javascript -->
     <script>
      // create the websocket; for intranet use the ip-address of the raspberry pi suffices;
     var socket = io.connect('http://localhost:3000');
     window.socket = socket;
-    var chart,
-        startDate = Date.UTC(2009, 9, 6, 0, 0, 0);
-    chart = new Highcharts.Chart({
+    var temp,
+        hum,
+        startDate = new Date(Date.now());
+    var now = new Date(startDate.getTime()+startDate.getTimezoneOffset()*60*1000);
+    startDate = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() ,
+      now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+
+    window.temp =
+    temp = new Highcharts.Chart({
         chart: {
-            renderTo: 'chart',
+            renderTo: 'temperature',
             events: {
                 load: function() {
-                    console.log('loaded')
                     socket.on('initialize', function (values) {
                         console.log(values)
-                        chart.series[0].setData(values);
+                        temp.series[0].setData(values);
                     });
 
                     socket.on('update', function(model) {
                         // console.log('UPDATE', model);
 
-                        if(typeof model.t === 'string') model.t = parseInt(model.t);
-                        chart.series[0].addPoint(model.t, 1, 1);
+                        if(typeof model.t === 'string') model.t = parseFloat(model.t);
+                        if(isNaN(model.t)) return
+                        temp.series[0].addPoint(model.t, 1, 1);
                     });
                 }
             }
@@ -65,7 +74,60 @@
             name: 'Temperature',
             type: 'area',
             pointStart:startDate,
-            pointInterval:5*60*1000,
+            pointInterval: 16 * 1000,
+            data: []
+        }]
+     });
+
+    window.hum =
+    hum = new Highcharts.Chart({
+        chart: {
+            renderTo: 'humidity',
+            events: {
+                load: function() {
+
+                    console.log('loaded')
+                    socket.on('initialize', function (values) {
+                        console.log(values)
+                        hum.series[0].setData(values);
+                    });
+
+                    socket.on('update', function(model) {
+                        // console.log('UPDATE', model);
+
+                        if(typeof model.h === 'string') model.h = parseFloat(model.h);
+                        if(isNaN(model.h)) return
+                        hum.series[0].addPoint(model.h, 1, 1);
+                    });
+                }
+            }
+        },
+        title: {
+            text: 'Humidity (%)'
+        },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150,
+            maxZoom: 20 * 1000
+        },
+        yAxis: {
+            title: {
+                text: '%',
+                margin: 80
+            }
+        },
+        plotOptions: {
+            series: {
+                marker: {
+                    radius: 2
+                }
+            }
+        },
+        series: [{
+            name: 'Temperature',
+            type: 'area',
+            pointStart:startDate,
+            pointInterval: 16 * 1000,
             data: []
         }]
      });
