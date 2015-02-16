@@ -12,7 +12,7 @@ module.exports = function register(server) {
         socket.join('live-tracker');
 
         Pubsub.on('live-tracker', function(data){
-            console.log('HERE', data);
+            // console.log('HERE', data);
             socket.emit('update', data);
         });
 
