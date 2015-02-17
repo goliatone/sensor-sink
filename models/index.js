@@ -25,6 +25,20 @@ module.exports = function register(app){
         collection: models.Location
     });
 
+    restful.addResource({
+        app: app,
+        urlPrefix: 'api',
+        resourceName: 'sublocations',
+        collection: models.Sublocation
+    });
+
+    restful.addResource({
+        app: app,
+        urlPrefix: 'api',
+        resourceName: 'device-types',
+        collection: models.DeviceType
+    });
+
     return
     //curl -H "Content-Type: application/json" -d '{"uuid":"xyz","token":"AD90ADF90ADF88ADF0ADF", "timestamp":1423761255422}' http://localhost:3000/api/devices
     var Device = app.Device = restful.model('device', mongoose.Schema({
