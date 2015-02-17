@@ -67,3 +67,4 @@ node_modules
 
 ##Cruft
 public/javascripts/vendors
+models/data/*
