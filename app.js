@@ -22,6 +22,14 @@ connect();
 
 mongoose.connection.on('error', console.log);
 mongoose.connection.on('disconnected', connect);
+
+
+process.on('SIGINT', function() {
+    mongoose.connection.close(function () {
+        console.log('SIGINT: Mongoose default connection disconnected.');
+        process.exit(0);
+    });
+});
 ///
 
 var app = express();
