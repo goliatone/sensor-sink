@@ -11,28 +11,28 @@ module.exports = function register(app){
     restful.addResource({
         app: app,
         urlPrefix: 'api',
-        resourceName: 'devices',
+        resourceSlug: 'devices',
         collection: models.Device
     });
 
     restful.addResource({
         app: app,
         urlPrefix: 'api',
-        resourceName: 'locations',
+        resourceSlug: 'locations',
         collection: models.Location
     });
 
     restful.addResource({
         app: app,
         urlPrefix: 'api',
-        resourceName: 'sublocations',
+        resourceSlug: 'sublocations',
         collection: models.Sublocation
     });
 
     restful.addResource({
         app: app,
         urlPrefix: 'api',
-        resourceName: 'device-types',
+        resourceSlug: 'device-types',
         collection: models.DeviceType
     });
 
