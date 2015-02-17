@@ -21,7 +21,7 @@ TODO:
 - Check `swig` template engine.
 
 Estimote UUID:
-B9407F30-F5F8-466E-AFF9-25556B57FE6D
-major:
-minor:
+uuid: B9407F30-F5F8-466E-AFF9-25556B57FE6D
+major: Location
+minor: Sublocation
 region: <= we have a location, devices places in one location can be members of multiple regions.
