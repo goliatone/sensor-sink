@@ -5,9 +5,9 @@ var mongoose = require("mongoose"),
 
 
 var Location = new Schema({
-    uuid        : { type: String, required: true, index: { unique: true, sparse: true } },
-    name        : String,
-    description : String,
+    uuid        : { type: String/*, required: true*/, index: { unique: true, sparse: true } },
+    name        : {type: String, trim: true},
+    description : {type: String, trim: true},
     geolocation : {
         lng: Number,
         lat: Number
@@ -16,28 +16,27 @@ var Location = new Schema({
 
 var Sublocation = new Schema();
 Sublocation.add({
-    uuid      : { type: String, required: true, index: { unique: true, sparse: true }},
-    name      : { type: String, index: true },
-    description : String,
-    _location  : [Sublocation]
+    uuid        : { type: String/*, required: true*/, index: { unique: true, sparse: true }},
+    name        : { type: String, trim: true},
+    description : {type: String, trim: true},
+    _location   : [Sublocation]
 });
 
 var DeciveType = new Schema({
-    name        : String,
-    description : String,
-    label       : String,
+    name        : { type: String, trim: true },
+    description : {type: String, trim: true},
+    label       : { type: String, trim: true, index: true },
     metadata    : Schema.Types.Mixed
 });
 
 var Device = new Schema({
     uuid        : { type: String, required: true, index: { unique: true, sparse: true } },
-    name        : String,
-    description : String,
-    status      : String,
+    name        : { type: String, trim: true },
+    description : {type: String, trim: true},
+    status      : {type: String, trim: true},
     _type       : { type: Schema.ObjectId, ref: 'DeviceType' },
     _location   : { type: Schema.ObjectId, ref: 'Location' }
 });
-
 
 
 Device.plugin(timestamps);
