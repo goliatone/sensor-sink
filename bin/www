@@ -10,4 +10,4 @@ var server = app.listen(app.get('port'), function() {
 
 app.server = server;
 //SOCKETS.IO
-require('../middleware/sockets')(server);
+require('../middleware/sockets')(app, server);
