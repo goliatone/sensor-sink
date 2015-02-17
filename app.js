@@ -7,6 +7,23 @@ var bodyParser = require('body-parser');
 var ejs = require('ejs');
 
 
+///
+// Connect to mongodb
+require('tungus'); //mock mongodb, for now.
+var mongoose = require('mongoose');
+var connect = function () {
+    var options = { server: { socketOptions: { keepAlive: 1 } } };
+    // mongoose.connect(config.db, options);
+    var dbpath = 'tingodb://' + __dirname + '/models/data';
+    mongoose.connect(dbpath, options);
+};
+
+connect();
+
+mongoose.connection.on('error', console.log);
+mongoose.connection.on('disconnected', connect);
+///
+
 var app = express();
 
 app.set('env', 'development');
