@@ -15,6 +15,7 @@ var Location = new Schema({
     }
 });
 
+//Make a self reference
 var Sublocation = new Schema();
 Sublocation.add({
     uuid        : { type: String/*, required: true*/, index: { unique: true, sparse: true }},
