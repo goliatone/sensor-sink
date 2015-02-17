@@ -1,6 +1,3 @@
-// var restful = require('node-restful'),
-//     path = require('path'),
-//     mongoose = restful.mongoose;
 
 var express = require('express');
 
@@ -57,20 +54,3 @@ module.exports = function register(app){
 
     Device.register(app, '/api/devices');
 };
-
-process.on('SIGINT', function() {
-    mongoose.connection.close(function () {
-        console.log('SIGINT: Mongoose default connection disconnected.');
-        process.exit(0);
-    });
-});
-
-// var db = require('./../mongooseModels'),
-//     restful = require('../restful');
-
-// restful.addResource({
-//   app: app,
-//   urlPrefix: 'api',
-//   resourceName: 'users',
-//   collection: db.user
-// });
