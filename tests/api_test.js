@@ -56,7 +56,7 @@ describe('express rest API for devices', function() {
             .end(function(e, res) {
                 // console.log(res.body)
                 expect(e).to.eql(null);
-                expect(typeof res.body).to.eql('object');
+                expect(typeof res.body).to.eql('number');
                 done();
             });
     });
