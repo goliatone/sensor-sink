@@ -17,6 +17,13 @@ $ npm i -g supervisor
 ```
 
 
+### Development
+To run mocha tests:
+
+```terminal
+$ ./node_modules/mocha/bin/mocha tests/* -G -w
+```
+
 TODO:
 - Check `swig` template engine.
 
