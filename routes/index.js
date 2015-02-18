@@ -8,4 +8,7 @@ router.get('/', function(req, res) {
     });
 });
 
-module.exports = router;
+module.exports = function register(app) {
+    app.use('/', router);
+    router.app = app;
+};
