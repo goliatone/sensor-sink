@@ -1,3 +1,8 @@
+/*
+ * before anything else, make __root available
+ */
+global.$__root = __dirname;
+
 var express = require('express');
 
 //Configura DB
@@ -6,12 +11,15 @@ require('./lib/setup/db')();
 
 var app = express();
 
-global.__root = __dirname;
 
 require('./lib/setup/server')(app, {
     root:__dirname
 });
 
+//SOCKETS.IO
+app.on('app.pre', function(payload){
+    require('./middleware/sockets')(app, payload.server);
+});
 
 //ROUTES
 require('./routes/index')(app);
