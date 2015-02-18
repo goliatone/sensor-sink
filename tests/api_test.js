@@ -4,10 +4,11 @@ var generateUUID = require('../lib/mongoose-uuid').generateUUID;
 
 describe('express rest API for devices', function() {
     var ID,
+        MODEL_NAME = 'configurations',
         UUID = generateUUID();
 
     it('post object', function(done) {
-        superagent.post('http://localhost:3000/api/devices')
+        superagent.post('http://localhost:3000/api/' + MODEL_NAME)
             .send({
                 uuid: UUID,
                 _type: 1
@@ -24,7 +25,7 @@ describe('express rest API for devices', function() {
     });
 
     it('retrieves an object', function(done) {
-        superagent.get('http://localhost:3000/api/devices/' + ID)
+        superagent.get('http://localhost:3000/api/' + MODEL_NAME +'/' + ID)
             .end(function(e, res) {
                 // console.log(res.body)
                 expect(e).to.eql(null);
@@ -36,7 +37,7 @@ describe('express rest API for devices', function() {
     });
 
     it('retrieves a collection', function(done) {
-        superagent.get('http://localhost:3000/api/devices')
+        superagent.get('http://localhost:3000/api/' + MODEL_NAME)
             .end(function(e, res) {
                 // console.log(res.body)
                 expect(e).to.eql(null);
@@ -49,7 +50,7 @@ describe('express rest API for devices', function() {
     });
 
     it('updates an object', function(done) {
-        superagent.put('http://localhost:3000/api/devices/' + ID)
+        superagent.put('http://localhost:3000/api/' + MODEL_NAME + '/' + ID)
             .send({
                 _type: 1
             })
@@ -62,7 +63,7 @@ describe('express rest API for devices', function() {
     });
 
     it('checks an updated object', function(done) {
-        superagent.get('http://localhost:3000/api/devices/' + ID)
+        superagent.get('http://localhost:3000/api/' + MODEL_NAME + '/' + ID)
             .end(function(e, res) {
                 // console.log(res.body)
                 expect(e).to.eql(null);
@@ -75,7 +76,7 @@ describe('express rest API for devices', function() {
     });
 
     it('removes an object', function(done) {
-        superagent.del('http://localhost:3000/api/devices/' + ID)
+        superagent.del('http://localhost:3000/api/' + MODEL_NAME + '/' + ID)
             .end(function(e, res) {
                 // console.log(res.body)
                 expect(e).to.eql(null);
