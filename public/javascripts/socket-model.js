@@ -67,16 +67,19 @@
         options || (options = {});
         options.path = options.path || '/api/socket';
 
-        this.socket = io.connect(address, options);
+        this.socket = io(address, options);
+        this.socket.on('server.update', function(){
+            console.log('SERVER UPDATE', arguments)
+        })
     }
 
-    SocektModel.prototype.remoteCall = function(method, path, data, callback) {
+    SocektModel.prototype.remoteCall = function(method, keypath, data, callback) {
         this.socket.emit(method, {
-            path: path,
+            path: keypath,
             data: data
         });
 
-        this.socket.once(method + '-' + path, callback);
+        this.socket.once(method + ':' + keypath, callback);
 
         return this;
     };
@@ -84,49 +87,49 @@
     /**
      * RESTful: "GET" method
      *
-     * @param  {String}   path     API endpoint
+     * @param  {String}   keypath  API endpoint
      * @param  {Object}   data     Send data to server
      * @param  {Callback} callback It will handle the response only once
      * @return {this}
      */
-    SocektModel.prototype.get = function(path, data, callback) {
-        return this.remoteCall('get', path, data, callback);
+    SocektModel.prototype.get = function(keypath, data, callback) {
+        return this.remoteCall('get', keypath, data, callback);
     };
 
     /**
      * RESTful: "POST" method
      *
-     * @param  {String}   path     API endpoint
+     * @param  {String}   keypath  API endpoint
      * @param  {Object}   data     Send data to server
      * @param  {Callback} callback It will handle the response only once
      * @return {this}
      */
-    SocektModel.prototype.post = function(path, data, callback) {
-        return this.remoteCall('post', path, data, callback);
+    SocektModel.prototype.post = function(keypath, data, callback) {
+        return this.remoteCall('post', keypath, data, callback);
     };
 
     /**
      * RESTful: "PUT" method
      *
-     * @param  {String}   path     API endpoint
+     * @param  {String}   keypath  API endpoint
      * @param  {Object}   data     Send data to server
      * @param  {Callback} callback It will handle the response only once
      * @return {this}
      */
-    SocektModel.prototype.put = function(path, data, callback) {
-        return this.remoteCall('put', path, data, callback);
+    SocektModel.prototype.put = function(keypath, data, callback) {
+        return this.remoteCall('put', keypath, data, callback);
     };
 
     /**
      * RESTful: "DELETE" method
      *
-     * @param  {String}   path     API endpoint
+     * @param  {String}   keypath  API endpoint
      * @param  {Object}   data     Send data to server
      * @param  {Callback} callback It will handle the response only once
      * @return {this}
      */
-    SocektModel.prototype.delete = function(path, data, callback) {
-        return this.remoteCall('delete', path, data, callback);
+    SocektModel.prototype.delete = function(keypath, data, callback) {
+        return this.remoteCall('delete', keypath, data, callback);
     };
 
     /**
