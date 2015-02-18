@@ -24,7 +24,7 @@ router.post('/collect', function(req, res){
 });
 
 
-module.exports = function(app) {
+module.exports = function register(app) {
     app.use('/sensor', router);
     router.app = app;
 };
