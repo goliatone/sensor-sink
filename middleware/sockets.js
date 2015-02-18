@@ -19,11 +19,25 @@ module.exports = function register(app, server) {
         console.log('REGISTER NEW SOCKET')
         socket.join('live-tracker');
 
+        socket.join('api/socket');
+
+        // socket.on('')
+
         Pubsub.on('live-tracker', function(data){
             // console.log('HERE', data);
             socket.emit('update', data);
         });
 
         socket.emit('initialize', [0, 5, 10]);
+        console.log('====')
+        socket.on('tst', function(data){
+            console.log('TST', data);
+            io.to('api/socket').emit('server.update');
+        });
+
+        socket.on('get', function(payload){
+            console.log('GET', payload)
+            socket.emit('get:'+payload.path)
+        });
     });
 };
