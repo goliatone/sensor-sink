@@ -11,3 +11,14 @@ var server = app.listen(app.get('port'), function() {
 app.emit('app.pre', {server:server})
 
 app.server = server;
+
+// var REPL = require('repl');
+// var repl = REPL.start('app> ');
+
+// repl.on('exit', function(err) {
+//     if (err) {
+//         console.error(err);
+//         process.exit(1);
+//     }
+//     process.exit(0);
+// });
