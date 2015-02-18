@@ -21,7 +21,15 @@ Sublocation.add({
     uuid        : { type: String/*, required: true*/, index: { unique: true, sparse: true }},
     name        : { type: String, trim: true},
     description : {type: String, trim: true},
-    _location   : [Sublocation]
+    _location   : [{ type: Schema.ObjectId, ref: 'Sublocation' }]
+});
+
+Sublocation.set('toJSON', {
+    trasnsform: function(doc, ret, options){
+        delete ret.updatedAt;
+        delete ret.createdAt;
+        return ret;
+    }
 });
 
 var DeciveType = new Schema({
@@ -42,6 +50,7 @@ var Device = new Schema({
 
 
 Device.plugin(uuidPplugin);
+
 Location.plugin(uuidPplugin);
 DeciveType.plugin(uuidPplugin);
 Sublocation.plugin(uuidPplugin);
