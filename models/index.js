@@ -1,12 +1,18 @@
 
 var express = require('express');
 
+var models = {};
+
+models.Device = require('./device');
+models.Location = require('./location');
+models.Sublocation = require('./sublocation');
+models.DeviceType = require('./deviceType');
 
 module.exports = function register(app){
     console.log('REGISTER models');
 
     var restful = require('../lib/restful');
-    var models = require('./device');
+
 
     restful.addResource({
         app: app,
