@@ -2,7 +2,8 @@
 var mongoose = require("mongoose"),
     Schema = mongoose.Schema,
     uuidPplugin = require('../lib/mongoose-uuid'),
-    timestamps = require('mongoose-timestamp');
+    timestamps = require('mongoose-timestamp'),
+    URLSlugs = require('mongoose-url-slugs');
 
 //Make a self reference
 var Sublocation = new Schema();
@@ -23,5 +24,6 @@ Sublocation.set('toJSON', {
 
 Sublocation.plugin(uuidPplugin);
 Sublocation.plugin(timestamps);
+Sublocation.plugin(URLSlugs('name', {field: 'slug'}));
 
 module.exports = mongoose.model('Sublocation', Sublocation);
