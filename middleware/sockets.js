@@ -10,9 +10,24 @@ module.exports = function register(app, server) {
     // Make sockets io accessible on each request
     // TODO: We might have to do this before adding routes?
     app.use(function(req,res,next){
-
         req.io = io;
         next();
+    });
+
+    Pubsub.on('device.create', function(doc){
+        io.to('api/socket').emit('device.create', doc);
+    });
+
+    Pubsub.on('device.update', function(doc){
+        io.to('api/socket').emit('device.update', doc);
+    });
+
+    Pubsub.on('device.delete', function(doc){
+        io.to('api/socket').emit('device.delete', doc);
+    });
+
+    Pubsub.on('device.error', function(doc){
+        io.to('api/socket').emit('device.error', doc);
     });
 
     io.on('connection', function(socket) {
@@ -30,14 +45,16 @@ module.exports = function register(app, server) {
 
         socket.emit('initialize', [0, 5, 10]);
         console.log('====')
+
         socket.on('tst', function(data){
             console.log('TST', data);
             io.to('api/socket').emit('server.update');
         });
 
+
         socket.on('get', function(payload){
             console.log('GET', payload)
-            socket.emit('get:'+payload.path)
+            socket.emit('get:'+payload.path, {pepe:23})
         });
     });
 };
