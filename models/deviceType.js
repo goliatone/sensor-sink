@@ -2,7 +2,8 @@
 var mongoose = require("mongoose"),
     Schema = mongoose.Schema,
     uuidPplugin = require('../lib/mongoose-uuid'),
-    timestamps = require('mongoose-timestamp');
+    timestamps = require('mongoose-timestamp'),
+    URLSlugs = require('mongoose-url-slugs');
 
 var DeciveType = new Schema({
     name        : { type: String, trim: true },
@@ -14,6 +15,6 @@ var DeciveType = new Schema({
 
 DeciveType.plugin(uuidPplugin);
 DeciveType.plugin(timestamps);
-
+DeciveType.plugin(URLSlugs('name', {field: 'slug'}));
 
 module.exports = mongoose.model('DeviceType', DeciveType);
