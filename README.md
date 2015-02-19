@@ -3,12 +3,12 @@
 To run the app, from terminal:
 
 ```terminal
-$ DEBUG=sensor-sink ./bin/www
+$ ENV=development DEBUG=sensor-sink ./bin/www
 ```
 
 If you  have `supervisor` installed:
 ```terminal
-$ DEBUG=sensor-sink supervisor ./bin/www 
+$ ENV=development DEBUG=sensor-sink supervisor ./bin/www 
 ```
 
 If not you can install it by issuing the following command:
