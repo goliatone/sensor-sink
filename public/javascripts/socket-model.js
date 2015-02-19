@@ -36,7 +36,7 @@
             return mod;
         };
     }
-}(this, 'SocektModel', function() {
+}(this, 'SocketModel', function() {
 
     /**
      * Shim console, make sure that if no console
@@ -63,7 +63,7 @@
         return con;
     };
 
-    function SocektModel(address, options) {
+    function SocketModel(address, options) {
         options || (options = {});
         options.path = options.path || '/api/socket';
 
@@ -73,7 +73,7 @@
         })
     }
 
-    SocektModel.prototype.remoteCall = function(method, keypath, data, callback) {
+    SocketModel.prototype.remoteCall = function(method, keypath, data, callback) {
         this.socket.emit(method, {
             path: keypath,
             data: data
@@ -92,7 +92,7 @@
      * @param  {Callback} callback It will handle the response only once
      * @return {this}
      */
-    SocektModel.prototype.get = function(keypath, data, callback) {
+    SocketModel.prototype.get = function(keypath, data, callback) {
         return this.remoteCall('get', keypath, data, callback);
     };
 
@@ -104,7 +104,7 @@
      * @param  {Callback} callback It will handle the response only once
      * @return {this}
      */
-    SocektModel.prototype.post = function(keypath, data, callback) {
+    SocketModel.prototype.post = function(keypath, data, callback) {
         return this.remoteCall('post', keypath, data, callback);
     };
 
@@ -116,7 +116,7 @@
      * @param  {Callback} callback It will handle the response only once
      * @return {this}
      */
-    SocektModel.prototype.put = function(keypath, data, callback) {
+    SocketModel.prototype.put = function(keypath, data, callback) {
         return this.remoteCall('put', keypath, data, callback);
     };
 
@@ -128,20 +128,20 @@
      * @param  {Callback} callback It will handle the response only once
      * @return {this}
      */
-    SocektModel.prototype.delete = function(keypath, data, callback) {
+    SocketModel.prototype.delete = function(keypath, data, callback) {
         return this.remoteCall('delete', keypath, data, callback);
     };
 
     /**
      * Simple log implementation.
      */
-    SocektModel.prototype.logger = _shimConsole(console);
+    SocketModel.prototype.logger = _shimConsole(console);
 
     /**
      * Stub emit function. User must extend
      * and implement to get events.
      */
-    SocektModel.prototype.emit = function(event, options) {};
+    SocketModel.prototype.emit = function(event, options) {};
 
-    return SocektModel;
+    return SocketModel;
 }));
