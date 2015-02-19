@@ -2,7 +2,8 @@
 var mongoose = require("mongoose"),
     Schema = mongoose.Schema,
     uuidPplugin = require('../lib/mongoose-uuid'),
-    timestamps = require('mongoose-timestamp');
+    timestamps = require('mongoose-timestamp'),
+    URLSlugs = require('mongoose-url-slugs');
 
 
 var Location = new Schema({
@@ -18,5 +19,6 @@ var Location = new Schema({
 
 Location.plugin(uuidPplugin);
 Location.plugin(timestamps);
+Location.plugin(URLSlugs('name', {field: 'slug'}));
 
 module.exports = mongoose.model('Location', Location);
