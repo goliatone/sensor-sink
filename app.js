@@ -3,6 +3,7 @@
  */
 global.$__root = __dirname;
 
+// var express = require('./lib/liveio');
 var express = require('express');
 
 //Configura DB
