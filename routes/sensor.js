@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Pubsub = require('../lib/eventchannel');
+var Sensor = require('../models/sensor');
 
 router.get('/', function(req, res) {
     res.send({
@@ -17,6 +18,7 @@ router.post('/collect', function(req, res){
     //THIS IS A JOKE :)
     Pubsub.emit('live-tracker', req.body);
     // router.app.server.io.sockets.in('live-tracker').emit('kaka', req.body);
+    if(req.body) Sensor.create(req.body);
 
     res.send({
         status: true
