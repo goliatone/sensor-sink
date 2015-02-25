@@ -32,7 +32,7 @@ module.exports = function register(app, server) {
 
     io.on('connection', function(socket) {
         console.log('REGISTER NEW SOCKET');
-        console.log('HANDSHACKE', socket.handshake.user);
+        // console.log('HANDSHACKE', socket.handshake.user);
 
         socket.join('live-tracker');
 
