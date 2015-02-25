@@ -21,7 +21,7 @@
     <script>
 
      // create the websocket; for intranet use the ip-address of the raspberry pi suffices;
-    var socket = io.connect('http://localhost:3000');
+    var socket = io.connect('http://127.0.0.1:3000');
     window.socket = socket;
 
     socket.on('device.create', function(device){
@@ -36,7 +36,7 @@
         console.log('DEVICE ERROR', device);
     });
 
-    window.sm = new SocketModel('http://localhost:3000');
+    window.sm = new SocketModel('http://127.0.0.1:3000');
 
     var temp,
         hum,
