@@ -52,12 +52,12 @@ describe('express rest API for devices', function() {
     it('updates an object', function(done) {
         superagent.put('http://localhost:3000/api/' + MODEL_NAME + '/' + ID)
             .send({
-                _type: 1
+                description: "something"
             })
             .end(function(e, res) {
-                // console.log(res.body)
+                console.log(res.body)
                 expect(e).to.eql(null);
-                expect(typeof res.body).to.eql('number');
+                expect(typeof res.body).to.eql('object');
                 done();
             });
     });
@@ -65,12 +65,13 @@ describe('express rest API for devices', function() {
     it('checks an updated object', function(done) {
         superagent.get('http://localhost:3000/api/' + MODEL_NAME + '/' + ID)
             .end(function(e, res) {
-                // console.log(res.body)
+                console.log(res.body)
                 expect(e).to.eql(null);
+                //TODO: FIX RETURN TYPES
                 expect(typeof res.body).to.eql('object');
                 expect(res.body._id.length);
                 expect(res.body._id).to.eql(ID);
-                expect(res.body._type).to.eql(1);
+                expect(res.body.description).to.eql("something");
                 done();
             });
     });
