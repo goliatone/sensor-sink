@@ -8,6 +8,7 @@ models.Configuration = require('./configuration');
 models.Location = require('./location');
 models.Sublocation = require('./sublocation');
 models.DeviceType = require('./deviceType');
+models.Sensor = require('./sensor');
 
 module.exports = function register(app){
     console.log('REGISTER models');
@@ -20,6 +21,13 @@ module.exports = function register(app){
         urlPrefix: 'api',
         resourceSlug: 'devices',
         collection: models.Device
+    });
+
+    restful.addResource({
+        app: app,
+        urlPrefix: 'api',
+        resourceSlug: 'sensors',
+        collection: models.Sensor
     });
 
     restful.addResource({
