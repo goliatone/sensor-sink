@@ -1,5 +1,5 @@
 //Need to do this before requiring moongose, tungus is tingodb
-var mongoose = require("mongoose"),
+var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     Pubsub = require('../lib/eventchannel'),
     uuidPplugin = require('../lib/mongoose-uuid'),
