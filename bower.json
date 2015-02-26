@@ -20,6 +20,7 @@
     "grouter": "latest",
     "go2o": "latest",
     "glogger": "latest",
-    "moment-timezone": "~0.3.0"
+    "moment-timezone": "~0.3.0",
+    "metrics-graphics": "~2.2.0"
   }
 }
