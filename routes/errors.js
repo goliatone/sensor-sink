@@ -2,20 +2,9 @@
  * catch 404 and forward to error handler
  */
 function _404(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-}
-
-/*
- * development error handler
- * will print stacktrace
- */
-function dev_500(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error.html', {
-        message: err.message,
-        error: err
+    res.status(404).render('404', {
+        url: req.originalUrl,
+        error: 'Not found'
     });
 }
 
@@ -24,15 +13,19 @@ function dev_500(err, req, res, next) {
  * no stacktraces leaked to user
  */
 function _500(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error.html', {
-        message: err.message,
-        error: {}
-    });
+    // treat as 404
+    if (err.message
+        && (~err.message.indexOf('not found')
+        || (~err.message.indexOf('Cast to ObjectId failed')))) {
+            return next();
+    }
+
+    console.error(err.stack);
+    // error page
+    res.status(500).render('500', { error: err.stack });
 }
 
 module.exports = function(app, config){
-    app.use(_404);
-    if (app.get('env') === 'development') app.use(dev_500);
     app.use(_500);
+    app.use(_404);
 };
