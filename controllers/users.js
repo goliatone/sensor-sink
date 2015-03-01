@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var utils = require('../lib/utils');
 
-exports.register = function(app){
+module.exports = function register(app){
 
     var passport = app.get('passport');
 
