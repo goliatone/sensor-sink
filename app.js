@@ -11,6 +11,8 @@ var express = require('express');
 //Configure DB
 require('./lib/setup/db')(config.db);
 
+//MODELS
+require('./models')();
 
 var app = express();
 
@@ -30,8 +32,7 @@ require('./routes/index')(app);
 require('./routes/users')(app);
 require('./routes/sensor')(app);
 
-//MODELS
-require('./models')(app);
+require('./controllers')(app, config);
 
 //We include error handler routes after MODELS
 //because, for now, we handle RESTul API there.
