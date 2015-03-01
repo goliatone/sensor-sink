@@ -59,6 +59,9 @@ module.exports = {
     },
     session:{
         store: ''
+    },
+    swig:{
+        cache: false
     }
 
 };
