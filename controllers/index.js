@@ -4,6 +4,8 @@ var models = require('../models')();
 
 module.exports = function(app){
 
+    require('./users')(app);
+
     restful.addResource({
         app: app,
         urlPrefix: 'api',
