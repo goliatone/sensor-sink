@@ -66,5 +66,5 @@ npm-debug.log
 node_modules
 
 ##Cruft
-public/javascripts/vendors
+public/js/vendors
 models/data/*
