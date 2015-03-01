@@ -1,7 +1,7 @@
 /*global define:true requirejs:true*/
 /* jshint strict: false */
 requirejs.config({
-    baseUrl: 'javascripts',
+    baseUrl: 'js',
     paths: {
         'app': 'app/app',
         // 'gpub': 'components/gpub/gpub',
