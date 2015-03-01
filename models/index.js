@@ -9,6 +9,7 @@ models.Location = require('./location');
 models.Sublocation = require('./sublocation');
 models.DeviceType = require('./deviceType');
 models.Sensor = require('./sensor');
+models.User = require('./user');
 
 module.exports = function register(app){
     console.log('REGISTER models');
@@ -58,7 +59,8 @@ module.exports = function register(app){
         collection: models.DeviceType
     });
 
-    return
+    return models;
+
     //curl -H "Content-Type: application/json" -d '{"uuid":"xyz","token":"AD90ADF90ADF88ADF0ADF", "timestamp":1423761255422}' http://localhost:3000/api/devices
     var Device = app.Device = restful.model('device', mongoose.Schema({
         uuid: 'string',
