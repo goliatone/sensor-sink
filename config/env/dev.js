@@ -35,6 +35,7 @@ require('tungus');
  * Expose
  */
 module.exports = {
+    env:'development',
     db: {
         path: 'tingodb://' + process.env.PWD + '/models/data',
         options:{
@@ -44,5 +45,20 @@ module.exports = {
                 }
             }
         }
+    },
+    multer:{
+        dest: process.env.PWD + '/uploads/',
+        rename: function (fieldname, filename) {
+            return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
+        }
+    },
+    logging: 'dev',
+    cookieSession: {
+        secret: 'secret',
+        keys: ['wonder_app_key', 'wonder_app_key_2']
+    },
+    session:{
+        store: ''
     }
+
 };
