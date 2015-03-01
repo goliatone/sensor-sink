@@ -1,20 +1,22 @@
 /*
  * before anything else, make __root available
  */
-global.$__root = __dirname;
+// global.$__root = __dirname;
 
+var config = require('./config');
+// console.log('CONFIG', config)
 // var express = require('./lib/liveio');
 var express = require('express');
 
 //Configura DB
-require('./lib/setup/db')();
+require('./lib/setup/db')(config.db);
 
 
 var app = express();
 
 
 require('./lib/setup/server')(app, {
-    root:__dirname
+    root: __dirname
 });
 
 //SOCKETS.IO
@@ -30,36 +32,9 @@ require('./routes/sensor')(app);
 //MODELS
 require('./models')(app);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error.html', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error.html', {
-        message: err.message,
-        error: {}
-    });
-});
-
+//We include error handler routes after MODELS
+//because, for now, we handle RESTul API there.
+//TODO: Refactor!
+require('./routes/errors')(app);
 
 module.exports = app;
