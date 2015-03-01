@@ -4,15 +4,20 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title><%= title %></title>
-        <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/javascripts/socket-model.js"></script>
+
+    <script src="/js/socket-model.js"></script>
+
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="/javascripts/vendors/moment/moment.js"></script>
-    <script src="/javascripts/vendors/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
+
+    <script src="/js/vendors/moment/moment.js"></script>
+    <script src="/js/vendors/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
+
     <script src="https://rawgit.com/highslide-software/highcharts.com/master/js/themes/dark-unica.js"></script>
+
     <body>
      <!-- create the div for the chart -->
      <div id="temperature" style="width:100%; height:200px;"></div>
@@ -242,6 +247,6 @@
     }
 
     </script>
-    <script src="javascripts/vendors/requirejs/require.js" data-main="javascripts/main.js"></script>
+    <script src="js/vendors/requirejs/require.js" data-main="js/main.js"></script>
  </body>
 </html>
