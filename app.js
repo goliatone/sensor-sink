@@ -8,16 +8,17 @@ var config = require('./config');
 // var express = require('./lib/liveio');
 var express = require('express');
 
-//Configura DB
+//Configure DB
 require('./lib/setup/db')(config.db);
 
 
 var app = express();
 
+// Bootstrap passport config
+require('./models/user'); //TODO: Break loading models from RESTful
+require('./lib/setup/authentication')(app, config);
 
-require('./lib/setup/server')(app, {
-    root: __dirname
-});
+require('./lib/setup/server')(app, config);
 
 //SOCKETS.IO
 app.on('app.pre', function(payload){
