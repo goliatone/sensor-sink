@@ -28,11 +28,12 @@ module.exports = {
             }
         }
     },
-    cookieSession:{
+    cookieSession: {
         secret: 'secret',
         keys: ['wonder_app_key', 'wonder_app_key_2']
     },
     swig:{
-        cache: true
+        cache: false,
+        varControls:['<%=', '%>']
     }
 };
