@@ -1,0 +1,19 @@
+.widget.number {
+    background-color: #ff3366;
+    padding:30px;
+}
+
+.widget.number > .value {
+    color:#fff;
+    font-size:54px;
+}
+
+.widget.number > .value .units {
+    color:#fff;
+    font-size:20px;
+}
+
+.widget.number > .label {
+    color:#fff;
+    font-size:20px;
+}
