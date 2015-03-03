@@ -18,12 +18,9 @@
 
     <script src="https://rawgit.com/highslide-software/highcharts.com/master/js/themes/dark-unica.js"></script>
 
-    <script id="numberwidget-template" type="text/ractive">
-        <p>Hola Mundo Mundial!!!</p>
-    </script>
+
     <script id="content-template" type="text/ractive">
         <number-widget />
-        {{name}} says that you are {{adjective}}!!
     </script>
 
     <body>
@@ -35,7 +32,7 @@
      <div id="content"></div>
 
      <!-- Start of Javascript -->
-    <!--script>
+    <script>
 
      // create the websocket; for intranet use the ip-address of the raspberry pi suffices;
     var socket = io.connect('http://127.0.0.1:3000');
@@ -257,7 +254,7 @@
         });
     }
 
-    </script-->
+    </script>
     <script src="js/vendors/requirejs/require.js" data-main="js/main.js"></script>
  </body>
 </html>
