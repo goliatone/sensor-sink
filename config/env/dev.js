@@ -57,11 +57,11 @@ module.exports = {
         secret: 'secret',
         keys: ['wonder_app_key', 'wonder_app_key_2']
     },
-    session:{
+    session: {
         store: ''
     },
-    swig:{
-        cache: false
+    swig: {
+        cache: false,
+        varControls:['<%=', '%>']
     }
-
 };
