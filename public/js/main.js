@@ -6,7 +6,7 @@ requirejs.config({
         'app': 'app/app',
         'socket': 'app/services/socket',
         'gpub': 'vendors/gpub/src/gpub',
-
+        'text': 'vendors/requirejs-text/text',
         'numberwidget': 'app/widgets/number/number',
         //
         // 'gconfig': 'components/gconfig/gconfig',
@@ -26,8 +26,14 @@ requirejs.config({
         'ractive': 'vendors/ractive/ractive',
         // 'jquery': 'components/jquery/jquery',
 
+    },
+    map: {
+        '*': {
+            'css': 'vendors/require-css/css' // or whatever the path to require-css is
+        }
     }
 });
+
 define('main', function(require) {
     console.log('Loading');
 
@@ -50,6 +56,18 @@ define('main', function(require) {
             name:'Pepe',
             adjective:'awesome'
         }
+    });
+
+    socket.client.on('device.create', function(device){
+        // view.findComponent('number-widget').set('value', 56);
+    });
+
+    socket.client.on('update', function(data){
+        data.forEach(function(model){
+            if(typeof model.t === 'string') model.t = parseFloat(model.t);
+            if(isNaN(model.t)) return
+            view.findComponent('number-widget').set('value', model.t);
+        });
     });
 
     window.view = view;
