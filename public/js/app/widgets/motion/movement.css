@@ -1,0 +1,12 @@
+.widget.motion {
+    padding:30px;
+    height: 90px;
+}
+
+.widget.motion.off {
+    background-color: #121212;
+}
+
+.widget.motion.on {
+    background-color: #00ffaa;
+}
