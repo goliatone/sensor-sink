@@ -8,6 +8,7 @@ requirejs.config({
         'gpub': 'vendors/gpub/src/gpub',
         'text': 'vendors/requirejs-text/text',
         'numberwidget': 'app/widgets/number/number',
+        'movementwidget': 'app/widgets/motion/movement',
         //
         // 'gconfig': 'components/gconfig/gconfig',
         // 'gconfig.path': 'components/gconfig/gconfig.path',
@@ -46,6 +47,14 @@ define('main', function(require) {
 
     var NumberWidget = require('numberwidget');
 
+    NumberWidget.register('sound-widget');
+    NumberWidget.register('humidity-widget');
+    NumberWidget.register('light-widget');
+    NumberWidget.register('temperature-widget');
+
+    var MovementWidget = require('movementwidget');
+    MovementWidget.register('movement-widget');
+
     var ractive = require('ractive');
 
     var view = new Ractive({
@@ -58,6 +67,8 @@ define('main', function(require) {
         }
     });
 
+
+
     socket.client.on('device.create', function(device){
         // view.findComponent('number-widget').set('value', 56);
     });
@@ -65,8 +76,13 @@ define('main', function(require) {
     socket.client.on('update', function(data){
         data.forEach(function(model){
             if(typeof model.t === 'string') model.t = parseFloat(model.t);
-            if(isNaN(model.t)) return
-            view.findComponent('number-widget').set('value', model.t);
+            // if(isNaN(model.t)) return
+            model.t && view.findComponent('temperature-widget').set('value', model.t);
+            model.l && view.findComponent('light-widget').set('value', model.l);
+            model.h && view.findComponent('humidity-widget').set('value', model.h);
+            model.s && view.findComponent('sound-widget').set('value', model.s);
+
+            model.m && view.findComponent('movement-widget').set('value', model.m);
         });
     });
 
