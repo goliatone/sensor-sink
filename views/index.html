@@ -20,16 +20,23 @@
 
 
     <script id="content-template" type="text/ractive">
-        <number-widget />
+        <temperature-widget id="temperature-widget" type="temperature" />
+        <humidity-widget id="humidity-widget" type="humidity" label="Humidity" units="%"/>
+        <light-widget id="light-widget" type="light" label="Light" units="l"/>
+        <sound-widget id="sound-widget" type="sound" label="Noise" units="dB"/>
+
+        <movement-widget />
     </script>
 
     <body>
+
+     <div id="content"></div>
+
      <!-- create the div for the chart -->
      <div id="temperature" style="width:100%; height:200px;"></div>
      <div id="humidity" style="width:100%; height:200px;"></div>
      <div id="sound" style="width:100%; height:200px;"></div>
 
-     <div id="content"></div>
 
      <!-- Start of Javascript -->
     <script>
