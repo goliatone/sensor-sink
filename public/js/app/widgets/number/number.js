@@ -1,5 +1,4 @@
 define('numberwidget', function(require){
-    console.log('NUMBER WIDGET');
 
     require('css!/js/app/widgets/number/number');
 
@@ -13,6 +12,14 @@ define('numberwidget', function(require){
         append:true,
         init:function(o){
 
+        },
+        logger: console,
+        registerModel:function(dispatcher, keypath){
+            this.logger.log('REGISTER', keypath);
+            dispatcher.observe(keypath, function(newValue){
+                if(newValue === undefined) return;
+                this.set('value', newValue);
+            }.bind(this));
         },
         data: {
             type:'widget',
