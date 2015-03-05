@@ -1,7 +1,6 @@
 define('movementwidget', function(require){
-    console.warn('EHRE')
+
     require('css!/js/app/widgets/motion/movement');
-console.warn('EHRE')
     var template = require('text!/js/app/widgets/motion/movement.html');
 
     //TODO: State feedback. Reading...
@@ -10,12 +9,31 @@ console.warn('EHRE')
     var MovementWidget = Ractive.extend({
         template: template,
         append:true,
+        logger: console,
         init:function(o){
+
             this.observe('value', function(newValue, oldValue, keypath) {
-                var status = newValue === 1 ? 'on' : 'off';
+                if(newValue === 0 && this.timeOut) return;
+
+                var status = (newValue === 1) ? 'on' : 'off';
                 this.set('status', status);
-                console.log('STATUS', status);
+
+                if(newValue === 0) return;
+
+                var delay = this.get('movementPeriod');
+                clearTimeout(this.timeOut);
+                this.timeOut = setTimeout(this.resetMovement.bind(this), delay);
             });
+        },
+        resetMovement: function(){
+            this.set('status', 0);
+        },
+        registerModel: function(dispatcher, keypath){
+            dispatcher.observe(keypath, function(newValue, oldValue){
+                console.log('NEW %s OLD %s', newValue, oldValue);
+                if(newValue === undefined) return;
+                this.set('value', newValue);
+            }.bind(this));
         },
         data: {
             type:'widget',
@@ -23,6 +41,7 @@ console.warn('EHRE')
             status:'off',
             location:'',
             label: 'Movement',
+            movementPeriod:(4 * 60 * 1000),
             getStatus: function(){
                 return this.get('value') === 0 ? 'off' : 'on';
             }
