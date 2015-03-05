@@ -46,44 +46,45 @@ define('main', function(require) {
     var app = new App();
 
     var NumberWidget = require('numberwidget');
+    var MovementWidget = require('movementwidget');
 
+    //NOTE: This has to happen before we render main view!!
+    //TODO: Fix timing. Create a view driven way to register
+    //widgets! Or at least with JSON.
     NumberWidget.register('sound-widget');
     NumberWidget.register('humidity-widget');
     NumberWidget.register('light-widget');
     NumberWidget.register('temperature-widget');
 
-    var MovementWidget = require('movementwidget');
     MovementWidget.register('movement-widget');
 
     var ractive = require('ractive');
 
     var view = new Ractive({
         el:'content',
-        // append:true,
-        template:'#content-template',
-        data:{
-            name:'Pepe',
-            adjective:'awesome'
-        }
+        template:'#content-template'
     });
 
-
-
     socket.client.on('device.create', function(device){
-        // view.findComponent('number-widget').set('value', 56);
+        console.log('DEVICE CREATED', device)
     });
 
     socket.client.on('update', function(data){
-        data.forEach(function(model){
-            if(typeof model.t === 'string') model.t = parseFloat(model.t);
-            // if(isNaN(model.t)) return
-            model.t && view.findComponent('temperature-widget').set('value', model.t);
-            model.l && view.findComponent('light-widget').set('value', model.l);
-            model.h && view.findComponent('humidity-widget').set('value', model.h);
-            model.s && view.findComponent('sound-widget').set('value', model.s);
+        view.set('payload', data);
+    });
 
-            model.m && view.findComponent('movement-widget').set('value', model.m);
-        });
+    //TODO: Get from configuration file!
+    var WIDGETS = [
+        {id:'temperature-widget', keypath:'payload.*.t'},
+        {id: 'light-widget', keypath:'payload.*.l'},
+        {id: 'humidity-widget', keypath: 'payload.*.h'},
+        {id: 'sound-widget', keypath: 'payload.*.s'},
+        {id: 'movement-widget', keypath: 'payload.*.m'}
+    ];
+
+
+    WIDGETS.forEach(function(widget){
+        view.findComponent(widget.id).registerModel(view, widget.keypath);
     });
 
     window.view = view;
