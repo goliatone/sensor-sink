@@ -7,6 +7,8 @@ requirejs.config({
         'socket': 'app/services/socket',
         'gpub': 'vendors/gpub/src/gpub',
         'text': 'vendors/requirejs-text/text',
+
+        'sparkle': 'app/widgets/sparkle/sparkle',
         'numberwidget': 'app/widgets/number/number',
         'movementwidget': 'app/widgets/motion/movement',
         //
@@ -25,6 +27,7 @@ requirejs.config({
 
         // 'preloader': 'views/preloader',
         'ractive': 'vendors/ractive/ractive',
+        'd3': 'vendors/d3/d3',
         // 'jquery': 'components/jquery/jquery',
 
     },
@@ -45,6 +48,7 @@ define('main', function(require) {
 
     var app = new App();
 
+    var SparkleWidget = require('sparkle');
     var NumberWidget = require('numberwidget');
     var MovementWidget = require('movementwidget');
 
@@ -58,11 +62,14 @@ define('main', function(require) {
 
     MovementWidget.register('movement-widget');
 
+    SparkleWidget.register('himidity-sparkle');
+
     var ractive = require('ractive');
 
     var view = new Ractive({
-        el:'content',
-        template:'#content-template'
+        el: 'content',
+        debug: true,
+        template: '#content-template'
     });
 
     socket.client.on('device.create', function(device){
@@ -78,13 +85,14 @@ define('main', function(require) {
         {id:'temperature-widget', keypath:'payload.*.t'},
         {id: 'light-widget', keypath:'payload.*.l'},
         {id: 'humidity-widget', keypath: 'payload.*.h'},
+        {id: 'himidity-sparkle', keypath: 'payload.*.h', options:{label:'Humidity'}},
         {id: 'sound-widget', keypath: 'payload.*.s'},
         {id: 'movement-widget', keypath: 'payload.*.m'}
     ];
 
 
     WIDGETS.forEach(function(widget){
-        view.findComponent(widget.id).registerModel(view, widget.keypath);
+        view.findComponent(widget.id).registerModel(view, widget.keypath, widget.options);
     });
 
     window.view = view;
