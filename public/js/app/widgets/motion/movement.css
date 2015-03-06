@@ -1,6 +1,7 @@
 .widget.motion {
     padding:30px;
     height: 90px;
+    margin-bottom: 40px;
 }
 
 .widget.motion.off {
@@ -10,3 +11,4 @@
 .widget.motion.on {
     background-color: #00ffaa;
 }
+
