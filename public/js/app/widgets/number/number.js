@@ -10,10 +10,10 @@ define('numberwidget', function(require){
     var NumberWidget = Ractive.extend({
         template: template,
         append:true,
-        init:function(o){
+        logger: console,
+        onrender: function(o){
 
         },
-        logger: console,
         registerModel:function(dispatcher, keypath){
             this.logger.log('REGISTER', keypath);
             dispatcher.observe(keypath, function(newValue){
