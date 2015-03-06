@@ -8,9 +8,9 @@ define('movementwidget', function(require){
 
     var MovementWidget = Ractive.extend({
         template: template,
-        append:true,
+        append: true,
         logger: console,
-        init:function(o){
+        onrender: function(o){
 
             this.observe('value', function(newValue, oldValue, keypath) {
                 if(newValue === 0 && this.timeOut) return;
@@ -30,7 +30,7 @@ define('movementwidget', function(require){
         },
         registerModel: function(dispatcher, keypath){
             dispatcher.observe(keypath, function(newValue, oldValue){
-                console.log('NEW %s OLD %s', newValue, oldValue);
+                // console.log('NEW %s OLD %s', newValue, oldValue);
                 if(newValue === undefined) return;
                 this.set('value', newValue);
             }.bind(this));
