@@ -7,6 +7,7 @@ requirejs.config({
         'socket': 'app/services/socket',
         'gpub': 'vendors/gpub/src/gpub',
         'text': 'vendors/requirejs-text/text',
+        'clock': 'app/widgets/clock/clock',
         'sparkle': 'app/widgets/sparkle/sparkle',
         'numberwidget': 'app/widgets/number/number',
         'movementwidget': 'app/widgets/motion/movement',
@@ -29,6 +30,8 @@ requirejs.config({
 define('main', function(require) {
     console.log('Loading');
 
+    // require('css!vendors/gridism/gridism.css');
+
     var Client = require('socket');
     var socket = new Client();
 
@@ -36,6 +39,7 @@ define('main', function(require) {
 
     var app = new App();
 
+    var ClockWidget = require('clock');
     var SparkleWidget = require('sparkle');
     var NumberWidget = require('numberwidget');
     var MovementWidget = require('movementwidget');
@@ -50,7 +54,10 @@ define('main', function(require) {
 
     MovementWidget.register('movement-widget');
 
-    SparkleWidget.register('himidity-sparkle');
+    SparkleWidget.register('humidity-sparkle');
+    SparkleWidget.register('temperature-sparkle');
+
+    ClockWidget.register('clock-widget');
 
     var ractive = require('ractive');
 
@@ -73,7 +80,8 @@ define('main', function(require) {
         {id:'temperature-widget', keypath:'payload.*.t'},
         {id: 'light-widget', keypath:'payload.*.l'},
         {id: 'humidity-widget', keypath: 'payload.*.h'},
-        {id: 'himidity-sparkle', keypath: 'payload.*.h', options:{label:'Humidity'}},
+        {id: 'humidity-sparkle', keypath: 'payload.*.h', options:{label:'Humidity'}},
+        {id: 'temperature-sparkle', keypath: 'payload.*.t', options:{label:'Temperature'}},
         {id: 'sound-widget', keypath: 'payload.*.s'},
         {id: 'movement-widget', keypath: 'payload.*.m'}
     ];
