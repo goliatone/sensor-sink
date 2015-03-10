@@ -7,33 +7,21 @@ requirejs.config({
         'socket': 'app/services/socket',
         'gpub': 'vendors/gpub/src/gpub',
         'text': 'vendors/requirejs-text/text',
-
         'sparkle': 'app/widgets/sparkle/sparkle',
         'numberwidget': 'app/widgets/number/number',
         'movementwidget': 'app/widgets/motion/movement',
-        //
-        // 'gconfig': 'components/gconfig/gconfig',
-        // 'gconfig.path': 'components/gconfig/gconfig.path',
-        // 'gconfig.qstring': 'components/gconfig/gconfig.qstring',
-        // 'gconfig.interpolate': 'components/gconfig/gconfig.interpolate',
-
         'io': '/socket.io/socket.io.js',
-
         'extend': 'vendors/gextend/src/extend',
         // 'keypath': 'components/gkeypath/keypath',
         // 'templatecontext': 'components/templatecontext/templatecontext',
-
-
-
         // 'preloader': 'views/preloader',
         'ractive': 'vendors/ractive/ractive',
         'd3': 'vendors/d3/d3',
         // 'jquery': 'components/jquery/jquery',
-
     },
     map: {
         '*': {
-            'css': 'vendors/require-css/css' // or whatever the path to require-css is
+            'css': 'vendors/require-css/css'
         }
     }
 });
