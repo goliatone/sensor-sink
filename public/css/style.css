@@ -6,6 +6,7 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color:#fafafa;
+  display:block;
 }
 
 a {
@@ -17,5 +18,12 @@ a {
  WIDGETS
  *********************************/
 .widget {
-    width: 200px;
+    min-heigth: 200px;
+}
+
+section {
+    display: block;
+    width: 100%;
+    clear: both;
+    float: left;
 }
