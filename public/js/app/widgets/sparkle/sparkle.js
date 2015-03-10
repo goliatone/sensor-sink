@@ -20,7 +20,7 @@ define('sparkle', function(require){
                 // this.redraw(n);
             });
 
-            var id = '#graph-1',
+            var id = '#' + this.get('targetId'),
                 width = 400,
                 height = 100,
                 interpolation = 'basis',
