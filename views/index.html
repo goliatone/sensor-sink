@@ -3,22 +3,69 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
         <title><%= title %></title>
         <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/js/vendors/gridism/gridism.css">
     </head>
     <script src="/js/socket-model.js"></script>
 
     <script id="content-template" type="text/ractive">
-        <temperature-widget id="temperature-widget" type="temperature" />
-        <humidity-widget id="humidity-widget" type="humidity" label="Humidity" units="%"/>
-        <light-widget id="light-widget" type="light" label="Light" units="l"/>
-        <sound-widget id="sound-widget" type="sound" label="Noise" units="dB"/>
+        <div class="grid">
+            <div class="unit one-quarter center-on-mobiles">
+                <h3>Location: Main Room</h3>
+                <p>RPI sensor dashboard</p>
+            </div>
+            <div class="unit three-quarters">
+                <div class="grid">
+                    <div class="unit whole">
+                        <clock-widget />
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <himidity-sparkle />
-        <movement-widget/>
+        <div class="grid">
+            <div class="unit half">
+                <temperature-widget id="temperature-widget" type="temperature">
+                    <div class="grid">
+                        <div class="unit whole">
+                            <temperature-sparkle targetId="graph-0"/>
+                        </div>
+                    </div>
+                </temperature-widget>
+            </div>
+            <div class="unit half">
+                <humidity-widget id="humidity-widget" type="humidity" label="Humidity" units="%">
+                    <div class="grid">
+                        <div class="unit whole">
+                            <humidity-sparkle targetId="graph-1"/>
+                        </div>
+                    </div>
+                </humidity-widget>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="unit half">
+                <light-widget id="light-widget" type="light" label="Light" units="l"/>
+            </div>
+            <div class="unit half">
+                <sound-widget id="sound-widget" type="sound" label="Noise" units="dB"/>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="unit whole">
+                <movement-widget />
+            </div>
+        </div>
     </script>
     <body>
-        <div id="content"></div>
+        <div class="grid">
+            <div id="content">
+
+            </div>
+        </div>
         <script src="js/vendors/requirejs/require.js" data-main="js/main.js"></script>
     </body>
 </html>
