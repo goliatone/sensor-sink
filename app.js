@@ -34,6 +34,9 @@ require('./routes/sensor')(app);
 
 require('./controllers')(app, config);
 
+
+require('./config/advertise')(config.advertise);
+
 //We include error handler routes after MODELS
 //because, for now, we handle RESTul API there.
 //TODO: Refactor!
