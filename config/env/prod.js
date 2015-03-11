@@ -35,5 +35,15 @@ module.exports = {
     swig:{
         cache: false,
         varControls:['<%=', '%>']
+    },
+    advertise: {
+        port: 9876,
+        type: '_http',
+        data: {
+            name: 'hello',
+            txt: {
+                txtvers: '1'
+            }
+        }
     }
 };
