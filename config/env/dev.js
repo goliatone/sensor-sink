@@ -63,5 +63,18 @@ module.exports = {
     swig: {
         cache: false,
         varControls:['<%=', '%>']
+    },
+    advertise: {
+        //TODO: Get port from server.port!
+        port: 3000,
+        type: '_http',
+        data: {
+            name: 'sensor-sink',
+            txt: {
+                //TODO: Use uuid from server.uuid
+                uuid:'02AB29F5-A204-40F9-8D8E-5E6564B8ED26',
+                txtvers: '1'
+            }
+        }
     }
 };
