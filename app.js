@@ -31,6 +31,7 @@ app.on('app.pre', function(payload){
 require('./routes/index')(app);
 require('./routes/users')(app);
 require('./routes/sensor')(app);
+require('./routes/device')(app);
 
 require('./controllers')(app, config);
 
