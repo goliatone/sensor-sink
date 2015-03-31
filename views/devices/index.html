@@ -7,6 +7,16 @@
 {% block content %}
     <h3>Devices</h3>
     <a href="/devices/new">Add Device</a>
-    {% include './device.html' with devices %}
+    {% for device in devices %}
+      {% if loop.first %}<ul>{% endif %}
+      <li><%= loop.index %> - <%= loop.key %>: <%= device.name %></li>
+      {% if loop.last %}</ul>{% endif %}
+    {% endfor %}
+
+    {% for device in devices %}
+      {% include './device.html' with device only %}
+    {% endfor %}
+
+
 {% endblock %}
 
