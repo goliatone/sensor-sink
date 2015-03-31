@@ -1,0 +1,12 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1><%= title %></h1>
+{% endblock %}
+
+{% block content %}
+    <h3>Devices</h3>
+    <a href="/devices/new">Add Device</a>
+    {% include './device.html' with devices %}
+{% endblock %}
+

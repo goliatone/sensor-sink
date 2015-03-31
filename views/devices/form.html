@@ -1,0 +1,11 @@
+
+<form method="post" class="content-form">
+  <input value="<%= _device.name? _device.name : '' %>" type="text" title="name" placeholder="Name" />
+  <input value="<%= _device.description? _device.description : '' %>" type="text" title="description" placeholder="Description" />
+  <input value="<%= _device.status? _device.status : '' %>" type="text" title="status" placeholder="Status" />
+  <input type="submit" />
+  {% if _device._id %}
+  <a href="/devices/<%= _device._id %>/delete" class="btn btn-delete">Delete</a>
+  {% endif %}
+</form>
+
