@@ -9,7 +9,12 @@
     <a href="/devices/new">Add Device</a>
     {% for device in devices %}
       {% if loop.first %}<ul>{% endif %}
-      <li><%= loop.index %> - <%= loop.key %>: <%= device.name %></li>
+      <li><%= loop.index %> - <%= loop.key %>: <%= device.name %>
+
+        <code>
+            <%= device|json(4) %>
+        </code>
+      </li>
       {% if loop.last %}</ul>{% endif %}
     {% endfor %}
 
