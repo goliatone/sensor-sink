@@ -28,7 +28,7 @@ Sensor.pre('save', function (next) {
 });
 
 Sensor.post('validate', function (doc) {
-  console.log('%s has been validated (but not saved yet)', doc._id, doc);
+    // console.log('%s has been validated (but not saved yet)', doc._id, doc);
 })
 
 Sensor.post('save', function(doc){
