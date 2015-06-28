@@ -13,14 +13,27 @@ var variables = {
 
 var url = process.env.NODE_UBIDOTS_URL;
 var token = process.env.NODE_UBIDOTS_TOKEN;
+var postOnlyLatest = true;
 
 module.exports = function register(app, server) {
     Pubsub.on('live-tracker', function(data){
         data = data || [];
         if(!Array.isArray(data)) data = [data];
 
+        //This would work to post only latest values
+        //for most sensors is ok, since light/humidity are
+        //linear in time. It is not ok for events such as
+        //movement which change only once in a while and we
+        //might be missing them. We do need a model and logic
+        //per sensor type. Movement needs to be updated all time
+        //Sound can be updated over time and we could average values
+        //that do not get updated?
+        if(postOnlyLatest) data = data.splice(0);
+
+        data.map(sendValues);
+
         var payload = [];
-        data.map(function(values){
+        function sendValues(values){
             Object.keys(values).map(function(key){
                 if(!variables.hasOwnProperty(key)) return;
                 payload.push({
@@ -28,7 +41,7 @@ module.exports = function register(app, server) {
                     value: values[key]
                 })
             });
-        });
+        }
 
         console.log('Ubidots save', Date.now());
 
