@@ -42,3 +42,34 @@ Flow:
 
 * Auth 
 * Set value of device
+
+Data Models:
+
+Location:
+- Region
+- Building
+- Floor
+- Unit (Office, House, Apartment)
+- Room
+
+Entities:
+- Device (RPi, Arduino)
+- Sensor
+- Actuator (light, led, speaker)
+- Commander (button)
+
+Actions:
+- Scene
+- Command
+- Action
+- Event
+
+Support:
+- Configuration
+
+
+Humans:
+- User
+- Employee
+- Guest
+- Visitor
