@@ -25,7 +25,8 @@ require('./lib/setup/server')(app, config);
 //SOCKETS.IO
 app.on('app.pre', function(payload){
     require('./middleware/sockets')(app, payload.server);
-    require('./clients/ubidots')(app, payload.server);
+    require('./clients/beebotte')(app, payload.server);
+    // require('./clients/ubidots')(app, payload.server);
 });
 
 //ROUTES
