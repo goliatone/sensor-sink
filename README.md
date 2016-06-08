@@ -1,14 +1,26 @@
+### Sensor Sink
 
+#### Development
 
-To run the app, from terminal:
+You need to pull dependencies using `npm i` form your source directory.
 
-```terminal
-$ ENV=development DEBUG=sensor-sink ./bin/www
+Ensure you have [envset][envset] and [slv][slv] installed, you can follow instructions on their respective repositories.
+
+**Generate envset file from template**
+Locally save the file `.envset.tpl` as `.envset` and provide valid values for the environment variables.
+
+* NODE_AMQP_ENDPOINT=amqp-endpoint>
+* NODE_AMQP_EXCHANGE=<exchange>
+
+Once you have a valid `envset` file, to run the server:
+
+```
+$ envset development -- ./bin/www
 ```
 
 If you  have `supervisor` installed:
 ```terminal
-$ ENV=development DEBUG=sensor-sink supervisor ./bin/www
+$ envset development -- supervisor ./bin/www
 ```
 
 If not you can install it by issuing the following command:
@@ -16,8 +28,8 @@ If not you can install it by issuing the following command:
 $ npm i -g supervisor
 ```
 
+#### Tests
 
-### Development
 To run mocha tests:
 
 ```terminal
@@ -73,3 +85,7 @@ Humans:
 - Employee
 - Guest
 - Visitor
+
+[pir-sensors]:https://github.com/goliatone/rpi-pir-sensor
+[envset]:https://github.com/goliatone/envset
+[slv]:https://github.com/goliatone/slv
