@@ -107,7 +107,7 @@ function luxTransformation(value, ops){
     var res0 = ops.resistance || 10;
     var vout = value * (5/1024);//5V gets split up into 1024 levels
     var lux = 500 / (res0 * (5 - vout)/vout);
-    return lux.toFixed(ops.decimals || 2);
+    return lux.toFixed(ops.decimals || 1);
 }
 
 function soundTransformation(value, ops){
@@ -118,9 +118,13 @@ function soundTransformation(value, ops){
     //http://electronics.stackexchange.com/questions/96205/how-to-convert-volts-in-db-spl
     var v1 = value * (5/1024);//5V gets split up into 1024 levels
     var v0 = 0.005012; //ref voltage -46dBV/Pa assuming 1Pa
-    var x = Math.log10(v1/v0) * 20; //sensitivity of -46dBV/Pa , this gives 0.005012 V RMS/ Pa
+    var xval = Math.log10(v1/v0) * 20; //sensitivity of -46dBV/Pa , this gives 0.005012 V RMS/ Pa
     var gain = ops.gain || 0;
-    var db = (-46) + x + 94 - gain;
-    if(isNaN(db)) return 0;
-    return db.toFixed(ops.decimals || 2);
+    var db = (-46) + xval + 94 - gain;
+
+    if(isNaN(db)) {
+        console.warn('NaN sound', db);
+        return 0;
+    }
+    return db.toFixed(ops.decimals || 1);
 }
