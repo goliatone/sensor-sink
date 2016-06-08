@@ -8,7 +8,7 @@ $ ENV=development DEBUG=sensor-sink ./bin/www
 
 If you  have `supervisor` installed:
 ```terminal
-$ ENV=development DEBUG=sensor-sink supervisor ./bin/www 
+$ ENV=development DEBUG=sensor-sink supervisor ./bin/www
 ```
 
 If not you can install it by issuing the following command:
@@ -40,7 +40,7 @@ Flow:
 - Device gets live updates.
 
 
-* Auth 
+* Auth
 * Set value of device
 
 Data Models:
