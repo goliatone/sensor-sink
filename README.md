@@ -8,7 +8,7 @@ $ ENV=development DEBUG=sensor-sink ./bin/www
 
 If you  have `supervisor` installed:
 ```terminal
-$ ENV=development DEBUG=sensor-sink supervisor ./bin/www 
+$ ENV=development DEBUG=sensor-sink supervisor ./bin/www
 ```
 
 If not you can install it by issuing the following command:
@@ -40,5 +40,36 @@ Flow:
 - Device gets live updates.
 
 
-* Auth 
+* Auth
 * Set value of device
+
+Data Models:
+
+Location:
+- Region
+- Building
+- Floor
+- Unit (Office, House, Apartment)
+- Room
+
+Entities:
+- Device (RPi, Arduino)
+- Sensor
+- Actuator (light, led, speaker)
+- Commander (button)
+
+Actions:
+- Scene
+- Command
+- Action
+- Event
+
+Support:
+- Configuration
+
+
+Humans:
+- User
+- Employee
+- Guest
+- Visitor

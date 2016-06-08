@@ -4,6 +4,11 @@
 
 var path = require('path');
 var extend = require('gextend');
+var TreeHugger = require('node-treehugger');
+
+TreeHugger({
+    namespace:'NODE'
+}).fromFile(__dirname + '/.secrets.json');
 
 //TODO: Load all file in env directory,
 //each has a method to figure out if its the right one
@@ -13,6 +18,7 @@ var development = require('./env/dev');
 var DEFAULTS = {
   root: path.normalize(__dirname + '/..')
 };
+
 
 /**
  * Expose
