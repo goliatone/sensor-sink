@@ -1,0 +1,27 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1><%= title %></h1>
+{% endblock %}
+
+{% block content %}
+    <h3>Devices</h3>
+    <a href="/devices/new">Add Device</a>
+    {% for device in devices %}
+      {% if loop.first %}<ul>{% endif %}
+      <li><%= loop.index %> - <%= loop.key %>: <%= device.name %>
+
+        <code>
+            <%= device|json(4) %>
+        </code>
+      </li>
+      {% if loop.last %}</ul>{% endif %}
+    {% endfor %}
+
+    {% for device in devices %}
+      {% include './device.html' with device only %}
+    {% endfor %}
+
+
+{% endblock %}
+

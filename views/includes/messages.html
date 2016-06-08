@@ -3,7 +3,7 @@
     <button class="close" type="button" data-dismiss="alert">×</button>
     <ul>
       {% for inf in info %}
-        <li><%= inf %></li>
+        <li>{{ inf }}</li>
       {% endfor %}
     </ul>
   </div>
@@ -14,7 +14,7 @@
     <button class="close" type="button" data-dismiss="alert">×</button>
     <ul>
       {% for error in errors %}
-        <li><%= error %></li>
+        <li>{{ error }}</li>
       {% endfor %}
     </ul>
   </div>
@@ -25,7 +25,7 @@
     <button class="close" type="button" data-dismiss="alert">×</button>
     <ul>
       {% for succ in success %}
-        <li><%= succ %></li>
+        <li>{{ succ }}</li>
       {% endfor %}
     </ul>
   </div>
@@ -36,7 +36,7 @@
     <button class="close" type="button" data-dismiss="alert">×</button>
     <ul>
       {% for warn in warning %}
-        <li><%= warn %></li>
+        <li>{{ warn }}</li>
       {% endfor %}
     </ul>
   </div>
