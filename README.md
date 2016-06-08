@@ -7,10 +7,14 @@ You need to pull dependencies using `npm i` form your source directory.
 Ensure you have [envset][envset] and [slv][slv] installed, you can follow instructions on their respective repositories.
 
 **Generate envset file from template**
-Locally save the file `.envset.tpl` as `.envset` and provide valid values for the environment variables.
+Locally save the file `.envset.tpl` as `.envset` and provide valid values for the environment variables:
 
-* NODE_AMQP_ENDPOINT=amqp-endpoint>
-* NODE_AMQP_EXCHANGE=<exchange>
+* NODE_UBIDOTS_TOKEN
+* NODE_UBIDOTS_URL
+
+* NODE_BEEBOTTEB_ACCESS_KEY
+* NODE_BEEBOTTEB_SECRET_KEY
+
 
 Once you have a valid `envset` file, to run the server:
 
