@@ -13,16 +13,16 @@
     <script id="content-template" type="text/ractive">
         <div class="grid">
             <div class="unit one-quarter center-on-mobiles">
-                <h3>Location: Main Room</h3>
-                <p>RPI sensor dashboard</p>
+                <h2>{{title}}</h2>
+                <h3>Location: {{location}}</h3>
             </div>
-            <div class="unit three-quarters">
+            <!--div class="unit three-quarters">
                 <div class="grid">
                     <div class="unit whole">
                         <clock-widget />
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
 
         <div class="grid">
@@ -48,7 +48,7 @@
 
         <div class="grid">
             <div class="unit half">
-                <light-widget id="light-widget" type="light" label="Light" units="l"/>
+                <light-widget id="light-widget" type="light" label="Light" units="lux"/>
             </div>
             <div class="unit half">
                 <sound-widget id="sound-widget" type="sound" label="Noise" units="dB"/>
