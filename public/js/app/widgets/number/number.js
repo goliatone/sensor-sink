@@ -14,10 +14,16 @@ define('numberwidget', function(require){
         onrender: function(o){
 
         },
-        registerModel:function(dispatcher, keypath){
+        registerModel:function(dispatcher, keypath, options){
+            options = options || {};
+
             this.logger.log('REGISTER', keypath);
             dispatcher.observe(keypath, function(newValue){
                 if(newValue === undefined) return;
+
+                //We might want to transform our values before displaying.
+                if(options.transform) newValue = options.transform.func(newValue, options.transform.ops);
+
                 this.set('value', newValue);
             }.bind(this));
         },
